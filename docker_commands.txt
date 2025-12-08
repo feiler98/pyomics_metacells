@@ -1,0 +1,8 @@
+# view images
+sudo docker images
+
+# create image from Dockerfile (current directory)
+sudo docker build -t pyomics_metacells_docker .
+
+# running with output to machine
+sudo docker run -v $HOME/Docker_project:/pyomics_metacells/metacells_out pyomics_metacells_docker

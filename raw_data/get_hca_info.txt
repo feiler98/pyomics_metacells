@@ -1,0 +1,7 @@
+###########################
+# get data from CellxGene #
+###########################
+
+https://cellxgene.cziscience.com/
+
+--> download the data into the raw_data folder and initialize the .sif converted docker file for the cloned github project
