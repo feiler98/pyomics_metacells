@@ -1,5 +1,5 @@
 # built on fedora
-FROM pyomics
+FROM feiler98/pyomics_fedora
 
 RUN mkdir -p /home/f/feiler/pyomics_metacells
 WORKDIR /home/f/feiler/pyomics_metacells
