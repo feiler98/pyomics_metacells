@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import scanpy as sc
 from logging_utils import log_out
-from split_hca_utils import adata_split_by_tissue
+from split_hca_utils import adata_split_by_tissue, adata_filter_normal_cells
 import urllib.request
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -68,14 +68,15 @@ for p_h5 in list_paths_h5ad:
     header_string = f"Generation of metacells for < HCA non-neuronal cells | {p_h5.stem} >"
     print(header_string)
     print("#"*len(header_string))
-    path_folder_seacells_out = path_out / f"non_neuro_{p_h5.stem}"
+    path_folder_seacells_out = path_out / f"{p_h5.stem}__seacells"
     path_folder_seacells_out.mkdir(exist_ok=True, parents=True)
     adata = sc.read_h5ad(p_h5)
+    adata = adata_filter_normal_cells(adata)
     sc.pp.highly_variable_genes(adata, n_top_genes=20000, subset=True, flavor="seurat_v3_paper")
     ut.scrna_dim_red_by_metacells(adata=adata,
                                   data_tag=p_h5.stem,
                                   ad_obs_cell_type_assignment="cell_type",
-                                  path_out=path_out / f"{p_h5.stem}__seacells")
+                                  path_out=path_folder_seacells_out)
 
 
 if __name__ == "__main__":

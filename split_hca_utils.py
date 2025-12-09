@@ -1,6 +1,9 @@
 import anndata as ad
 from pathlib import Path
 
+def adata_filter_normal_cells(adata: ad.AnnData) -> ad.AnnData:
+    list_normal_cells = [cell_idx for cell_idx, row in adata.obs.iterrows() if row["disease"] == "normal"]
+    return adata[list_normal_cells, :]
 
 def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path)):
     out_path.mkdir(exist_ok=True, parents=True)
