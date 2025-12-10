@@ -11,8 +11,6 @@ import urllib.request
 
 # pathlib.Path raw/in/out
 path_raw = Path(__file__).parent / "raw_data"
-print(path_raw)
-path_in_pre = Path(__file__).parent.parent / "pre_data"
 path_in = Path(__file__).parent.parent / "data"
 path_out = Path(__file__).parent.parent / "metacells_out"
 
