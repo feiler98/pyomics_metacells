@@ -1,6 +1,9 @@
 import anndata as ad
 from pathlib import Path
 
+import scanpy
+
+
 def adata_filter_normal_cells(adata: ad.AnnData) -> ad.AnnData:
     list_normal_cells = [cell_idx for cell_idx, row in adata.obs.iterrows() if row["disease"] == "normal"]
     return adata[list_normal_cells, :]
@@ -21,10 +24,11 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
     for key, dict_tissue in dict_sort.items():
         slice_adata = adata[adata.obs.tissue == key]
         slice_adata.obs.rename(index=dict_tissue, inplace=True)
-        slice_adata.write_h5ad(out_path  / f"{key}__{data_tag}.h5")
+        slice_adata.write(out_path  / f"{key}__{data_tag}.h5")
         print(f"Adata slice is saved as {key}__{data_tag}.h5 in {out_path}")
 
 
 
 if __name__ == "__main__":
+    #adata_split_by_tissue(scanpy.read_h5ad("/home/feilerwe/coding_playground/test_adata_cellxgene/data.h5ad"), "test_data",Path.cwd())
     pass
