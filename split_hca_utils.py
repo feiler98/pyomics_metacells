@@ -22,7 +22,7 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
         slice_adata = adata[adata.obs.tissue == key]
         slice_adata.obs.rename(index=dict_tissue, inplace=True)
         slice_adata.write_h5ad(out_path  / f"{key}__{data_tag}.h5")
-        print()
+        print(f"Adata slice is saved as {key}__{data_tag}.h5 in {out_path}")
 
 
 
