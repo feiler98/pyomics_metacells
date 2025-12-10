@@ -11,8 +11,8 @@ import urllib.request
 
 # pathlib.Path raw/in/out
 path_raw = Path(__file__).parent / "raw_data"
-path_in = Path(__file__).parent.parent / "data"
-path_out = Path(__file__).parent.parent / "metacells_out"
+path_in = Path(__file__).parent / "data"
+path_out = Path(__file__).parent / "metacells_out"
 
 # create raw_data and data if not exists
 if not path_raw.exists():
