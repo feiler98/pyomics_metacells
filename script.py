@@ -72,7 +72,7 @@ for p_h5 in list_paths_h5ad:
     path_folder_seacells_out.mkdir(exist_ok=True, parents=True)
     adata = sc.read_h5ad(p_h5)
     adata = adata_filter_normal_cells(adata)
-    sc.pp.highly_variable_genes(adata, n_top_genes=20000, subset=True, flavor="seurat_v3_paper")
+    sc.pp.highly_variable_genes(adata, n_top_genes=30000, subset=True, flavor="seurat_v3_paper")
     ut.scrna_dim_red_by_metacells(adata=adata,
                                   data_tag=p_h5.stem,
                                   ad_obs_cell_type_assignment="cell_type",
