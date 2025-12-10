@@ -12,9 +12,9 @@ import urllib.request
 # pathlib.Path raw/in/out
 path_raw = Path(__file__).parent / "raw_data"
 print(path_raw)
-path_in_pre = Path("scratch/tmp/feiler") / "pre_data"
-path_in = Path("scratch/tmp/feiler") / "data"
-path_out = Path("scratch/tmp/feiler") / "metacells_out"
+path_in_pre = Path("/scratch/tmp/feiler") / "metacells" / "pre_data"
+path_in = Path("/scratch/tmp/feiler") / "metacells" / "data"
+path_out = Path("/scratch/tmp/feiler") / "metacells" / "metacells_out"
 
 # create raw_data and data if not exists
 if not path_raw.exists():
