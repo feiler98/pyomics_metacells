@@ -1,8 +1,8 @@
 # built on fedora
 FROM feiler98/pyomics_fedora
 
-RUN mkdir -p /home/f/feiler/pyomics_metacells
-WORKDIR /home/f/feiler/pyomics_metacells
+RUN mkdir -p /scratch/tmp/feiler/pyomics_metacells
+WORKDIR /scratch/tmp/feiler/pyomics_metacells
 
 COPY . .
 
