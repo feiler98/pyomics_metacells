@@ -24,7 +24,7 @@ if not path_in.exists():
     path_in.mkdir(exist_ok=True, parents=True)
 
 # logging of stdin and stderr
-log_out(path_log=path_out, log_name=f"{Path(__file__).stem}__log")
+# log_out(path_log=path_out, log_name=f"{Path(__file__).stem}__log")
 
 # retrieve CellxGene Data as h5ad in raw_data folder
 # ----------------------------------------------------------------------------------------------------------------------
