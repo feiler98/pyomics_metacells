@@ -34,12 +34,14 @@ print("""
 ###############################
 """)
 
+"""
 df_data_url = pd.read_csv(path_raw / "data_download_partial.txt", index_col="tag", sep=", ", engine="python")
 for tags in list(df_data_url.index):
     url = df_data_url.loc[tags, "link"]
     retrive_as_path = path_raw / f"{tags}.h5ad"
     urllib.request.urlretrieve(url, retrive_as_path)
     print(f"Dataset < {url} > has been retrieved as {retrive_as_path}")
+"""
 
 # split data and save as .h5 in data
 # ----------------------------------------------------------------------------------------------------------------------
