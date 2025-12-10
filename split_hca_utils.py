@@ -6,14 +6,15 @@ def adata_filter_normal_cells(adata: ad.AnnData) -> ad.AnnData:
     return adata[list_normal_cells, :]
 
 def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path)):
-    out_path.mkdir(exist_ok=True, parents=True)
+    Path(out_path).mkdir(exist_ok=True, parents=True)
     list_available_tissues = list(set(adata.obs["tissue"]))
     dict_sort = {}
     for tissue in list_available_tissues:
         tissue_df_obs =  adata.obs.where(adata.obs["tissue"] == tissue).dropna()
         dict_tissue = {}
         for key, row in tissue_df_obs.iterrows():
-            new_key = f"{key.split(":")[1]}__{row["cell_type"]}__{row["disease"]}_{row["sex"]}_{row["development_stage"].split("-")[0]}y/o"
+            # just use the standard key to prevent errors
+            new_key = f"{key}__{row["cell_type"]}__{row["disease"]}_{row["sex"]}_{row["development_stage"].split("-")[0]}y/o"
             dict_tissue.update({key:new_key})
         dict_sort.update({tissue:dict_tissue})
     print(f"The data can be split in the following tissues: {" ".join(list(dict_sort.keys()))}")
