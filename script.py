@@ -12,16 +12,19 @@ import urllib.request
 # pathlib.Path raw/in/out
 path_raw = Path(__file__).parent / "raw_data"
 print(path_raw)
-path_in = Path(__file__).parent / "data"
-path_out = Path(__file__).parent / "metacells_out"
+path_in_pre = Path("scratch/tmp/feiler") / "pre_data"
+path_in = Path("scratch/tmp/feiler") / "data"
+path_out = Path("scratch/tmp/feiler") / "metacells_out"
 
 # create raw_data and data if not exists
 if not path_raw.exists():
     raise ValueError(f"Path {str(path_raw)} must exist to initiate the pipeline!")
-if not path_out.exists():
-    path_out.mkdir(exist_ok=True, parents=True)
+if not path_in_pre.exists():
+    path_in.mkdir(exist_ok=True, parents=True)
 if not path_in.exists():
     path_in.mkdir(exist_ok=True, parents=True)
+if not path_out.exists():
+    path_out.mkdir(exist_ok=True, parents=True)
 
 # logging of stdin and stderr
 # log_out(path_log=path_out, log_name=f"{Path(__file__).stem}__log")
@@ -34,14 +37,14 @@ print("""
 ###############################
 """)
 
-"""
+
 df_data_url = pd.read_csv(path_raw / "data_download_partial.txt", index_col="tag", sep=", ", engine="python")
 for tags in list(df_data_url.index):
     url = df_data_url.loc[tags, "link"]
-    retrive_as_path = path_raw / f"{tags}.h5ad"
+    retrive_as_path = path_in_pre / f"{tags}.h5ad"
     urllib.request.urlretrieve(url, retrive_as_path)
     print(f"Dataset < {url} > has been retrieved as {retrive_as_path}")
-"""
+
 
 # split data and save as .h5 in data
 # ----------------------------------------------------------------------------------------------------------------------
@@ -51,7 +54,7 @@ print("""
 ################################
 """)
 
-list_paths_h5ad = [p for p in path_raw.glob("*.h5ad")]
+list_paths_h5ad = [p for p in path_in_pre.glob("*.h5ad")]
 for p in list_paths_h5ad:
     import_adata = sc.read_h5ad(p, chunk_size=1000)
     adata_split_by_tissue(import_adata, p.stem, path_in)
