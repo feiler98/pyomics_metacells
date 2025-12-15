@@ -1,14 +1,41 @@
 import anndata as ad
 from pathlib import Path
 
-import scanpy
-
 
 def adata_filter_normal_cells(adata: ad.AnnData) -> ad.AnnData:
+    """
+    Removes all cells, which have for obs["disease"] != normal. Information is a requirement for the function to work
+    obviously...
+
+    Parameters
+    ----------
+    adata: ad.AnnData
+        AnnData object from cellxgene.
+
+    Returns
+    -------
+    ad.AnnData
+        Sliced AnnData object.
+    """
+
     list_normal_cells = [cell_idx for cell_idx, row in adata.obs.iterrows() if row["disease"] == "normal"]
     return adata[list_normal_cells, :]
 
 def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path)):
+    """
+    Splits the AnnData object by the obs["tissue"] column and saves the data as .h5 file.
+    Easier computation downstream with tissue agnostic metacell generation
+
+    Parameters
+    ----------
+    adata: ad.AnnData
+        AnnData object from cellxgene.
+    data_tag: str
+        Name for the export data.
+    out_path: str|Path
+        Directory for exporting the data.
+    """
+
     Path(out_path).mkdir(exist_ok=True, parents=True)
     list_available_tissues = list(set(adata.obs["tissue"]))
     dict_sort = {}
@@ -30,5 +57,4 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
 
 
 if __name__ == "__main__":
-    #adata_split_by_tissue(scanpy.read_h5ad("/home/feilerwe/coding_playground/test_adata_cellxgene/data.h5ad"), "test_data",Path.cwd())
     pass
