@@ -64,7 +64,7 @@ print("""
 """)
 
 # processing the preprepared files
-list_paths_h5ad = [p for p in path_in.glob("*.h5")]
+list_paths_h5ad = [p for p in path_in.glob("*.h5") if p.stem not in path_out.glob(f"*{p.stem}*")]
 for p_h5 in list_paths_h5ad:
     header_string = f"Generation of metacells for < HCA non-neuronal cells | {p_h5.stem} >"
     print(header_string)
