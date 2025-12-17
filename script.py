@@ -66,11 +66,12 @@ print("""
 # processing the preprepared files
 list_paths_h5ad = [p for p in path_in.glob("*.h5") if f"{p.stem}__seacells" not in path_out.glob(f"*{p.stem}*")]
 for p_h5 in list_paths_h5ad:
-    header_string = f"Generation of metacells for < HCA non-neuronal cells | {p_h5.stem} >"
+    header_string = f"Generation of metacells for < Cells | {p_h5.stem} >"
     print(header_string)
     print("#"*len(header_string))
     path_folder_seacells_out = path_out / f"{p_h5.stem}__seacells"
     path_folder_seacells_out.mkdir(exist_ok=True, parents=True)
+
     adata = sc.read_h5ad(p_h5)
     adata = adata_filter_normal_cells(adata)
     sc.pp.highly_variable_genes(adata, n_top_genes=30000, subset=True, flavor="seurat_v3_paper")
