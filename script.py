@@ -65,8 +65,9 @@ print("""
 
 # processing the preprepared files
 list_paths_h5ad = [p for p in path_in.glob("*.h5") if f"{p.stem}__seacells" not in path_out.glob(f"*{p.stem}*")]
+print("Data for Metacell generation: ", list_paths_h5ad)
 for p_h5 in list_paths_h5ad:
-    header_string = f"Generation of metacells for < Cells | {p_h5.stem} >"
+    header_string = f"Generation of metacells for < {p_h5.stem} >"
     print(header_string)
     print("#"*len(header_string))
     path_folder_seacells_out = path_out / f"{p_h5.stem}__seacells"
