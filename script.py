@@ -41,6 +41,8 @@ if len(list(path_raw.glob("*h5ad"))) == 0:
         retrive_as_path = path_raw / f"{tags}.h5ad"
         urllib.request.urlretrieve(url, retrive_as_path)
         print(f"Dataset < {url} > has been retrieved as {retrive_as_path}")
+else:
+    print("   --> skip")
 
 
 # split data and save as .h5 in data
@@ -57,6 +59,8 @@ if len(list(path_in.glob("*h5"))) == 0:
     for p in list_paths_h5ad:
         import_adata = sc.read_h5ad(p, chunk_size=1000)
         adata_split_by_tissue(import_adata, p.stem, path_in)
+else:
+    print("   --> skip")
 
 # metacell generation using SeaCells
 # ----------------------------------------------------------------------------------------------------------------------
@@ -73,7 +77,10 @@ for p_h5 in list_paths_h5ad:
     if f"{p_h5.stem}__seacells" in finished_metacells_dir:
         print(f"{p_h5.stem} has already been / is currently processed --> skip")
         continue
-    header_string = f"Generation of metacells for < {p_h5.stem} >"
+
+    # print for orientation
+    header_string = f"""
+    Generation of metacells for < {p_h5.stem} >"""
     print(header_string)
     print("#"*len(header_string))
     path_folder_seacells_out = path_out / f"{p_h5.stem}__seacells"
