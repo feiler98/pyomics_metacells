@@ -34,12 +34,12 @@ print("""
 """)
 
 
-"""df_data_url = pd.read_csv(path_raw / "data_download_partial.txt", index_col="tag", sep=", ", engine="python")
+df_data_url = pd.read_csv(path_raw / "data_download_partial.txt", index_col="tag", sep=", ", engine="python")
 for tags in list(df_data_url.index):
     url = df_data_url.loc[tags, "link"]
     retrive_as_path = path_raw / f"{tags}.h5ad"
     urllib.request.urlretrieve(url, retrive_as_path)
-    print(f"Dataset < {url} > has been retrieved as {retrive_as_path}")"""
+    print(f"Dataset < {url} > has been retrieved as {retrive_as_path}")
 
 
 # split data and save as .h5 in data
@@ -50,10 +50,10 @@ print("""
 ################################
 """)
 
-"""list_paths_h5ad = [p for p in path_raw.glob("*.h5ad")]
+list_paths_h5ad = [p for p in path_raw.glob("*.h5ad")]
 for p in list_paths_h5ad:
     import_adata = sc.read_h5ad(p, chunk_size=1000)
-    adata_split_by_tissue(import_adata, p.stem, path_in)"""
+    adata_split_by_tissue(import_adata, p.stem, path_in)
 
 # metacell generation using SeaCells
 # ----------------------------------------------------------------------------------------------------------------------
@@ -63,10 +63,13 @@ print("""
 ####################################
 """)
 
-# processing the preprepared files
-finished_metacells_dir = [p.stem for p in path_out.glob("*") if p.is_dir()]
-list_paths_h5ad = [p for p in path_in.glob("*.h5") if f"{p.stem}__seacells" not in finished_metacells_dir]
+# allows for parallel running of the same pipeline on the HPC
+list_paths_h5ad = [p for p in path_in.glob("*.h5")]
 for p_h5 in list_paths_h5ad:
+    finished_metacells_dir = [p.stem for p in path_out.glob("*") if p.is_dir()]
+    if f"{p_h5.stem}__seacells" in finished_metacells_dir:
+        print(f"{p_h5.stem} has already been / is currently processed --> skip")
+        continue
     header_string = f"Generation of metacells for < {p_h5.stem} >"
     print(header_string)
     print("#"*len(header_string))
