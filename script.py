@@ -66,7 +66,6 @@ print("""
 # processing the preprepared files
 finished_metacells_dir = [p.stem for p in path_out.glob("*") if p.is_dir()]
 list_paths_h5ad = [p for p in path_in.glob("*.h5") if f"{p.stem}__seacells" not in finished_metacells_dir]
-print("Data for Metacell generation: ", list_paths_h5ad)
 for p_h5 in list_paths_h5ad:
     header_string = f"Generation of metacells for < {p_h5.stem} >"
     print(header_string)
