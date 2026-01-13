@@ -3,3 +3,4 @@ IProgress
 ipywidgets
 scanpy
 anndata
+scipy

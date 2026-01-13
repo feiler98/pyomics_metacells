@@ -1,6 +1,6 @@
 import anndata as ad
 from pathlib import Path
-
+from scipy import shuffle
 
 def adata_filter_normal_cells(adata: ad.AnnData) -> ad.AnnData:
     """
@@ -51,8 +51,29 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
     for key, dict_tissue in dict_sort.items():
         slice_adata = adata[adata.obs.tissue == key]
         slice_adata.obs.rename(index=dict_tissue, inplace=True)
-        slice_adata.write(out_path  / f"{key}__{data_tag}.h5")
-        print(f"Adata slice is saved as {key}__{data_tag}.h5 in {out_path}")
+
+        # performance issues with SEACells now force the splitting if datasets too large
+        # threshold of splitting is set to 70,000 cells --> split by 2
+        n_max_obs_fit = int(len(slice_adata.obs) / 70000)
+        if n_max_obs_fit == 0:
+            list_split_slices = [slice_adata]
+        else:
+            shuffle(slice_adata.obs, inplace=True)
+            cell_tag_list_obs = list(slice_adata.obs.index)
+            list_split = list(range(0, len(slice_adata.obs), int(len(slice_adata.obs)/n_max_obs_fit)))
+            list_split.append(len(slice_adata.obs))
+            i = 1
+            list_split_slices = []
+            while i < len(list_split):
+                list_split_slices.append(slice_adata[cell_tag_list_obs[i-1:i], :])
+
+        for i, anndata_slice in enumerate(list_split_slices):
+            if len(list_split_slices) > 1:
+                tag_save = f"{key}__{data_tag}__split_{i}.h5"
+            else:
+                tag_save = f"{key}__{data_tag}.h5"
+            slice_adata.write(out_path  / tag_save)
+            print(f"Adata slice is saved as {tag_save} in {out_path}")
 
 
 
