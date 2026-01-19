@@ -1,6 +1,6 @@
 import anndata as ad
 from pathlib import Path
-from scipy import shuffle
+import numpy as np
 
 def adata_filter_normal_cells(adata: ad.AnnData) -> ad.AnnData:
     """
@@ -58,7 +58,8 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
         if n_max_obs_fit == 0:
             list_split_slices = [slice_adata]
         else:
-            shuffle(slice_adata.obs, inplace=True)
+            shuffled_index = np.random.permutation(slice_adata.obs.index)
+            slice_adata = slice_adata[shuffled_index, :]
             cell_tag_list_obs = list(slice_adata.obs.index)
             list_split = list(range(0, len(slice_adata.obs), int(len(slice_adata.obs)/n_max_obs_fit)))
             list_split.append(len(slice_adata.obs))
