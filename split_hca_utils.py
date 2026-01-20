@@ -67,6 +67,7 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
             list_split_slices = []
             while i < len(list_split):
                 list_split_slices.append(slice_adata[cell_tag_list_obs[i-1:i], :])
+                i+=1
 
         for i, anndata_slice in enumerate(list_split_slices):
             if len(list_split_slices) > 1:
