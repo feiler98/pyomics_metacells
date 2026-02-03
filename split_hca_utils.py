@@ -61,7 +61,7 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
             shuffled_index = np.random.permutation(slice_adata.obs.index)
             slice_adata = slice_adata[shuffled_index, :]
             cell_tag_list_obs = list(slice_adata.obs.index)
-            list_split = list(range(0, len(slice_adata.obs), int(len(slice_adata.obs)/n_max_obs_fit)))
+            list_split = list(range(0, len(slice_adata.obs), int(len(slice_adata.obs)/(n_max_obs_fit+1))+1))
             list_split.append(len(slice_adata.obs))
             i = 1
             list_split_slices = []
