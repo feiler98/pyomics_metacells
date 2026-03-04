@@ -54,7 +54,7 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
 
         # performance issues with SEACells now force the splitting if datasets too large
         # threshold of splitting is set to 70,000 cells --> split by 2
-        n_max_obs_fit = int(len(slice_adata.obs) / 70000)
+        n_max_obs_fit = int(len(slice_adata.obs) / 35000)
         if n_max_obs_fit == 0:
             list_split_slices = [slice_adata]
         else:
