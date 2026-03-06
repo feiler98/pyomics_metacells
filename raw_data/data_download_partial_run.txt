@@ -1,0 +1,5 @@
+tag, link
+female_blood_CMV_neg, https://datasets.cellxgene.cziscience.com/d3c02577-acef-4c68-9264-979c19de5b47.h5ad
+male_blood_CMV_neg, https://datasets.cellxgene.cziscience.com/843e8e08-f860-418a-bc63-02cb6f5bdce6.h5ad
+human_immune_health_atlas, https://datasets.cellxgene.cziscience.com/39832a61-3df1-4f1f-971d-3c2a74539047.h5ad
+colon_rectal_cancer_tissue, https://datasets.cellxgene.cziscience.com/66cadf3b-4c71-4930-8add-fa748745704d.h5ad

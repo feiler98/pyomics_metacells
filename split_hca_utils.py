@@ -53,8 +53,8 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
         slice_adata.obs.rename(index=dict_tissue, inplace=True)
 
         # performance issues with SEACells now force the splitting if datasets too large
-        # threshold of splitting is set to 70,000 cells --> split by 2
-        n_max_obs_fit = int(len(slice_adata.obs) / 35000)
+        # threshold of splitting is set to 50,000 cells --> split to equal sized portions
+        n_max_obs_fit = int(len(slice_adata.obs) / 50000)
         if n_max_obs_fit == 0:
             list_split_slices = [slice_adata]
         else:
@@ -66,8 +66,8 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
             i = 1
             list_split_slices = []
             while i < len(list_split):
-                list_split_slices.append(slice_adata[cell_tag_list_obs[list_split[i-1]:list_split[i]], :])
-                print(f"{key}, {data_tag}, length obs: {len(cell_tag_list_obs[list_split[i-1]:list_split[i]])}")
+                adata_split_slice = slice_adata[cell_tag_list_obs[list_split[i-1]:list_split[i]], :]
+                list_split_slices.append(adata_split_slice)
                 i+=1
 
         for i, anndata_slice in enumerate(list_split_slices):
@@ -75,7 +75,7 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
                 tag_save = f"{key}__{data_tag}__split_{i}.h5"
             else:
                 tag_save = f"{key}__{data_tag}.h5"
-            slice_adata.write(out_path  / tag_save)
+            anndata_slice.write(out_path  / tag_save)
             print(f"Adata slice is saved as {tag_save} in {out_path}")
 
 

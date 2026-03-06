@@ -35,7 +35,7 @@ print("""
 
 # check if path_raw has .h5ad-files --> data already downloaded
 if len(list(path_raw.glob("*h5ad"))) == 0:
-    df_data_url = pd.read_csv(path_raw / "data_download_partial.txt", index_col="tag", sep=", ", engine="python")
+    df_data_url = pd.read_csv(path_raw / "data_download_partial_run.txt", index_col="tag", sep=", ", engine="python")
     for tags in list(df_data_url.index):
         url = df_data_url.loc[tags, "link"]
         retrive_as_path = path_raw / f"{tags}.h5ad"
