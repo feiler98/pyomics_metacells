@@ -1,6 +1,6 @@
 tag, link
-ileum, https://datasets.cellxgene.cziscience.com/73904545-a97e-4b0b-9599-a8636359ef00.h5ad
-colon, https://datasets.cellxgene.cziscience.com/9a696bfb-7cd5-4c27-89f5-f7979ae12111.h5ad
-immune_aging_project, https://datasets.cellxgene.cziscience.com/7c98dadf-b249-4873-83be-51776674e9e1.h5ad
-skin_fibroblast, https://datasets.cellxgene.cziscience.com/ba0fb2d9-28c9-4149-8591-694e0b7d9c31.h5ad
-skin_epidermis, https://datasets.cellxgene.cziscience.com/022b2aab-8abb-4972-92e2-750b7cadafa7.h5ad
+blood_hca, https://datasets.cellxgene.cziscience.com/d80b69a7-4b37-4c00-8d46-e0c311c6d850.h5ad
+healthy_breast_tissue, https://datasets.cellxgene.cziscience.com/c41c8e10-b10a-428c-b6e7-a770ef988bab.h5ad
+breast_cancer, https://datasets.cellxgene.cziscience.com/7cdea341-ca7a-40fd-8192-b8ecb2d7b91e.h5ad
+gut_cancer, https://datasets.cellxgene.cziscience.com/a0a6b5b8-afb9-4911-a1c5-ce1c9b6aa057.h5ad
+tumor_microenvironment, https://datasets.cellxgene.cziscience.com/921d46a3-69b4-44a8-b2d6-9ef5c7803bc3.h5ad

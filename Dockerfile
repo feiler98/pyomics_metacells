@@ -1,5 +1,5 @@
 # built on fedora
-FROM feiler98/pyomics_fedora
+FROM feiler98/pyomics_fedora:latest
 
 RUN mkdir -p /scratch/tmp/feiler/pyomics_metacells
 WORKDIR /scratch/tmp/feiler/pyomics_metacells
