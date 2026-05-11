@@ -17,9 +17,10 @@ def adata_filter_normal_cells(adata: ad.AnnData) -> ad.AnnData:
     ad.AnnData
         Sliced AnnData object.
     """
-
-    list_normal_cells = [cell_idx for cell_idx, row in adata.obs.iterrows() if row["disease"] == "normal"]
+    # TumorNormal for htan_chop_pediatric_hgg
+    list_normal_cells = [cell_idx for cell_idx, row in adata.obs.iterrows() if row["TumorNormal"] == "Normal"]
     return adata[list_normal_cells, :]
+
 
 def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path)):
     """
@@ -77,7 +78,6 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
                 tag_save = f"{key}__{data_tag}.h5"
             anndata_slice.write(out_path  / tag_save)
             print(f"Adata slice is saved as {tag_save} in {out_path}")
-
 
 
 if __name__ == "__main__":

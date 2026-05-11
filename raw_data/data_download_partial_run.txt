@@ -1,6 +1,2 @@
 tag, link
-blood_hca, https://datasets.cellxgene.cziscience.com/d80b69a7-4b37-4c00-8d46-e0c311c6d850.h5ad
-healthy_breast_tissue, https://datasets.cellxgene.cziscience.com/c41c8e10-b10a-428c-b6e7-a770ef988bab.h5ad
-breast_cancer, https://datasets.cellxgene.cziscience.com/7cdea341-ca7a-40fd-8192-b8ecb2d7b91e.h5ad
-gut_cancer, https://datasets.cellxgene.cziscience.com/a0a6b5b8-afb9-4911-a1c5-ce1c9b6aa057.h5ad
-tumor_microenvironment, https://datasets.cellxgene.cziscience.com/921d46a3-69b4-44a8-b2d6-9ef5c7803bc3.h5ad
+htan_chop_pediatric_hgg, https://datasets.cellxgene.cziscience.com/08dc767a-c492-4a46-a24d-2fc25080ce92.h5ad
