@@ -1,2 +1,3 @@
 tag, link
-htan_chop_pediatric_hgg, https://datasets.cellxgene.cziscience.com/08dc767a-c492-4a46-a24d-2fc25080ce92.h5ad
+hca_neurons, https://datasets.cellxgene.cziscience.com/756a5b42-fbf9-4076-a7de-8c4ba34dc629.h5ad
+hca_non_neuronal, https://datasets.cellxgene.cziscience.com/c426f20f-e853-4370-8c5f-842e83c3c1e3.h5ad

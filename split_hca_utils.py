@@ -18,8 +18,9 @@ def adata_filter_normal_cells(adata: ad.AnnData) -> ad.AnnData:
         Sliced AnnData object.
     """
     # TumorNormal for htan_chop_pediatric_hgg
-    list_normal_cells = [cell_idx for cell_idx, row in adata.obs.iterrows() if row["TumorNormal"] == "Normal"]
-    return adata[list_normal_cells, :]
+    #list_normal_cells = [cell_idx for cell_idx, row in adata.obs.iterrows() if row["TumorNormal"] == "Normal"]
+    #return adata[list_normal_cells, :]
+    return adata
 
 
 def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path)):
@@ -44,8 +45,8 @@ def adata_split_by_tissue(adata: ad.AnnData, data_tag: str, out_path: (str, Path
         tissue_df_obs =  adata.obs.where(adata.obs["tissue"] == tissue).dropna()
         dict_tissue = {}
         for key, row in tissue_df_obs.iterrows():
-            # just use the standard key to prevent errors
-            new_key = f"{key}__{row["cell_type"]}__{row["disease"]}_{row["sex"]}_{row["development_stage"].split("-")[0]}y/o"
+            # just use the standard key to prevent errors  {row["disease"]}
+            new_key = f"{key}__{row["cell_type"]}__normal_{row["sex"]}_{row["development_stage"].split("-")[0]}y/o"
             dict_tissue.update({key:new_key})
         dict_sort.update({tissue:dict_tissue})
     print(f"The data can be split in the following tissues: {" ".join(list(dict_sort.keys()))}")
